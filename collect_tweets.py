@@ -15,9 +15,9 @@ api = tweepy.API(auth)
 
 # Now you're ready to look for tweets. Define your hashtag and dates range and collect tweets using Cursor
 tweets = tweepy.Cursor(api.search,
-              q="#dominiccummings" + "-filter:retweets",
+              q="#dominiccummings -filter:retweets",
               lang="en",
-              since="2018-11-16").items(50)
+              since="2020-05-20").items(50)
 # Control your no of collected tweets with .items()
 
 # Cursor creates a cursor class object we may iterate over and print tweets
