@@ -1,6 +1,7 @@
 # Import libraries
 import tweepy as tweepy
 import pandas as pd
+import re
 
 # Enter in twitter api details here
 consumer_key = '2LphmpVvZKjodaXA1LxuEwoXd'
@@ -96,8 +97,14 @@ for tweet in tweets:
 #   'retweeted': False,
 #   'lang': 'en'},
 
-# Quite a lot of information, much of it unnecessary for our analysis. We will filter by our chosen fields with list comprehension
-user_data = [[tweet.user.created_at, tweet.user.name, tweet.user.location, tweet.text] for tweet in tweets]
+# Quite a lot of information, much of it unnecessary for our analysis. 
+
+# First off, we will create a custom function to clean the text and remove additional characters and emojis using re (similar to gsub in R and tidyverse)
+def remove_characters(txt):
+    return " ".join(re.sub("([^0-9A-Za-z \t])|(\w+:\/\/\S+)", "", txt).split())
+
+# We will then filter results by our chosen fields with list comprehension whilst cleaning up the results using our remove_characters function
+user_data = [[tweet.user.created_at, remove_characters(tweet.user.name), tweet.user.location, remove_characters(tweet.text)] for tweet in tweets]
 
 # We can now move this into a pandas dataframe
 tweet_df = pd.DataFrame(data=user_data,
