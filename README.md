@@ -9,7 +9,7 @@ Written - Python3.8
 
 Environment - PyCharm Community 2020.1.1
 
-Libraries: tweepy v3.5.0
+Libraries: tweepy v3.5.0, nltk v3.5, pandas v0.15.2, matplotlib v3.2.1, itertools v2.3
 
 An example of code demonstrating how to interact with the Twitter API to collect tweets with designated hashtags and then analyse this data for sentiment and location.
 
