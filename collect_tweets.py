@@ -104,7 +104,7 @@ def remove_characters(txt):
     return " ".join(re.sub("([^0-9A-Za-z \t])|(\w+:\/\/\S+)", "", txt).split())
 
 # We will then filter results by our chosen fields with list comprehension whilst cleaning up the results using our remove_characters function
-user_data = [[tweet.user.created_at, remove_characters(tweet.user.name), tweet.user.location, remove_characters(tweet.text)] for tweet in tweets]
+user_data = [[tweet.created_at, remove_characters(tweet.user.name), tweet.user.location, remove_characters(tweet.text)] for tweet in tweets]
 
 # We can now move this into a pandas dataframe
 tweet_df = pd.DataFrame(data=user_data,
