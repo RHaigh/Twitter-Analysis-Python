@@ -68,4 +68,6 @@ plt.show()
 
 # Visual Analysis 2: Time series showing change in polarity of tweets over time
 
-# We will utilise a line chart to map the change in tweet polarity over a given time period. This can be used to map chagnes in public opinion relative to external events
+# We will utilise a line chart to map the change in tweet polarity over a given time period. This can be used to map changes in public opinion relative to external events
+lines = tweet_df.plot.line(x='Created At', y='Sentiment')
+# This analysis may not be helpful with very divisive issues but could be used to check to see if public opinion changes immediately after a press conference for example
