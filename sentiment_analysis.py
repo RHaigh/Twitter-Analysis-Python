@@ -13,9 +13,8 @@ from textblob import TextBlob
 
 ## Sentiment Analysis
 
-# There are numerous forms of sentiment analysis, each with its own strengths and drawback
-
-# Sentiment analysis is a term that refers to the use of natural language processing in order to ascertain the attitude of a speaker or writer toward a specific topic. 
+# There are numerous forms of sentiment analysis, each with its own strengths and drawbacks
+# Sentiment analysis refers to the use of natural language processing in order to ascertain the attitude of speech toward a specific topic. 
 
 # Simple Polarity Sentiment Analysis
 # This form of SA assigns a score of positive, neutral or negative to a text extract based on its word content. Each non-stop word is
