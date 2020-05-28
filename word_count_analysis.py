@@ -6,6 +6,7 @@ import collections
 import nltk
 from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
+from wordcloud import WordCloud, STOPWORDS
 
 # This file assumes you have created a list of tweets as detailed in the collect_tweets.py file within this repository
 
@@ -13,7 +14,7 @@ import matplotlib.pyplot as plt
 def remove_characters(txt):
     return " ".join(re.sub("([^0-9A-Za-z \t])|(\w+:\/\/\S+)", "", txt).split())
 
-## Word Count Analysis
+## Visual Analysis 1: Word Count Analysis
 # Using the same structure as in collect_tweets.py, we collect tweets based on a chosen hashtag
 
 tweets = tweepy.Cursor(api.search,
@@ -50,7 +51,7 @@ word_count.most_common(15)
 # Put this list into a pandas dataframe as we did with our tweets in collect_tweets.py
 tweet_df = pd.DataFrame(word_count.most_common(15),
                              columns=['words', 'count'])
-                             
+  
 # Finally we can us matplotlib to plot a horizontal bar graph of tweet frequency as a visual aid
 fig, ax = plt.subplots(figsize=(8, 8))
 
@@ -62,4 +63,34 @@ tweet_df.sort_values(by='count').plot.barh(x='words',
 
 ax.set_title("Most Common Words Found in Tweets")
 
+plt.show()
+
+
+## Visual Analysis 2: Word Cloud 
+
+# A word cloud is an attractive visual aid. Using the same method as in collect_tweets, create a pandas dataframe of tweets
+tweets = tweepy.Cursor(api.search,
+              q="#dominiccummings -filter:retweets",
+              lang="en",
+              since="2020-05-20").items(10)
+
+user_data = [[tweet.user.created_at, remove_characters(tweet.user.name), tweet.user.location, remove_characters(tweet.text)] for tweet in tweets]
+tweet_df = pd.DataFrame(data=user_data,
+                    columns=['Created At', "User", 'Location', 'Text'])
+
+
+# Join tweets to a single string as otherwise wordcloud cannot read the format
+words = ' '.join(tweet_df['Text'])
+full_word_list = " ".join([word for word in words.split()])
+
+# Put this new string into our WordCloud function, again taking into account stopwords
+wordcloud = WordCloud(stopwords=STOPWORDS,
+                      background_color='black',
+                      width=1800,
+                      height=1400
+                     ).generate(full_word_list)
+
+# Finally plot utsing matplotlib
+plt.imshow(wordcloud)
+plt.axis('off')
 plt.show()
