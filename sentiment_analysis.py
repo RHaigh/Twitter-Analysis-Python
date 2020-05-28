@@ -40,7 +40,7 @@ for tweet in tweets:
         print('Neutral')
         
 # In order to effectively visualise this, we will need to once again create a pandas dataframe but with our new sentiment columns
-user_data = [[tweet.user.created_at, remove_characters(tweet.user.name), tweet.user.location,
+user_data = [[tweet.created_at, remove_characters(tweet.user.name), tweet.user.location,
               remove_characters(tweet.text), TextBlob(tweet.text).sentiment[0],
               'Positive' if TextBlob(tweet.text).sentiment[0] > 0 
               else 'Negative' if TextBlob(tweet.text).sentiment[0] < 0
@@ -64,3 +64,8 @@ fig = plt.pie(counter_var.values(), labels=counter_var.keys(), autopct='%1.0f%%'
 
 plt.title("Polarity of Tweets Using #DominicCummings")
 plt.show()
+
+
+# Visual Analysis 2: Time series showing change in polarity of tweets over time
+
+# We will utilise a line chart to map the change in tweet polarity over a given time period. This can be used to map chagnes in public opinion relative to external events
