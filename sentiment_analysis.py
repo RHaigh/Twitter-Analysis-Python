@@ -13,7 +13,7 @@ from textblob import TextBlob
 
 ## Sentiment Analysis
 
-# There are numerous forms of sentiment analysis, each with its own strengths and drawbacks
+# There are numerous forms of sentiment analysis, each with its own strengths and drawbacks.
 # Sentiment analysis refers to the use of natural language processing in order to ascertain the attitude of speech toward a specific topic. 
 
 # Simple Polarity Sentiment Analysis
@@ -31,6 +31,7 @@ for tweet in tweets:
     print(tweet.text)
     analysis = TextBlob(tweet.text)
     print(analysis.sentiment)
+# The sentiment() function is the one that calculates our polarity score, ignoring stop words such as 'the' or 'and'
 
     if analysis.sentiment[0] > 0:
         print('Positive')
@@ -39,7 +40,7 @@ for tweet in tweets:
     else:
         print('Neutral')
         
-# In order to effectively visualise this, we will need to once again create a pandas dataframe but with our new sentiment columns
+# In order to effectively visualise this, we will need to once again create a pandas dataframe but with our new sentiment columns added
 user_data = [[tweet.created_at, remove_characters(tweet.user.name), tweet.user.location,
               remove_characters(tweet.text), TextBlob(tweet.text).sentiment[0],
               'Positive' if TextBlob(tweet.text).sentiment[0] > 0 
