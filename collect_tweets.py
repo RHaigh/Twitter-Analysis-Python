@@ -4,10 +4,10 @@ import pandas as pd
 import re
 
 # Enter in twitter api details here
-consumer_key = 'key'
-consumer_secret = 'key'
-access_key= 'key'
-access_secret = 'key'
+consumer_key = 'key_string'
+consumer_secret = 'key_string'
+access_key= 'key_string'
+access_secret = 'key_string'
 
 # These credentials are passed to Tweepys open-standard authorization protocol letting it know that it is allowed to access your twitter developer account
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
